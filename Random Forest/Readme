@@ -1,1 +1,1 @@
-predicting Weather using RandomForest and doing hyperparameter tuning by studying the parameter of the algorithm without using GridSearch 
+predicting Weather using RandomForest and doing hyperparameter tuning by studying the parameter of the algorithm without using GridSearch and Randomized Search
