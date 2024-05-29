@@ -59,7 +59,7 @@ class DataDividingStrategy(DataStrategy):
         Data Dividing strategy which divide data into train and test data.
         """
         try:
-            X = data.drop("review Score",axis = 1)
+            X = data.drop("review_score",axis = 1)
             y = data["review_score"]
             X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.20,random_state=42)
 
