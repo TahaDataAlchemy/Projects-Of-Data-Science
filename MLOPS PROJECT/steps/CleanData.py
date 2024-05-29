@@ -14,7 +14,7 @@ def clean_df(df: pd.DataFrame) -> Tuple[
     Annotated[pd.Series,"y_train"],
     Annotated[pd.Series,"y_test"],
 ]:
-    try:
+    try:    
         processStrategy = DataPreProcessingStrategy()
         data_cleaning = DataCleaning(df, processStrategy)
         processed_data = data_cleaning.handle_data()
