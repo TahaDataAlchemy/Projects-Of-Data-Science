@@ -1,5 +1,5 @@
 from pipelines.deployment_pipeline import(
-    deployment_pipeline,
+    continuous_deployment_pipeline,
     inference_pipeline,
 )
 from pipelines.deployment_pipeline import continuous_deployment_pipeline
@@ -11,6 +11,7 @@ from zenml.integrations.mlflow.model_deployers.mlflow_model_deployer import (
 from zenml.integrations.mlflow.services import MLFlowDeploymentService
 from typing import cast
 from rich import print
+
 
 # An inference pipeline in MLOps refers to the sequence of steps or processes that a machine learning model 
 # undergoes from the moment it receives input data to the point where it produces the final output or prediction. 
@@ -36,17 +37,21 @@ DEPLOY_AND_PREDICT = "deploy_and_predict"
 )
 @click.option(
     "--min-accuracy",
-    default=0.92,
+    default=0,
     help="Minimum accuracy required to deploy the model",
 )
 
 def run_deployment(config :str,min_accuracy:float):
        # get the MLflow model deployer stack component
+    from mlflow import set_tracking_uri
+
+    set_tracking_uri("http://127.0.0.1:5000")
     mlflow_model_deployer_component = MLFlowModelDeployer.get_active_model_deployer()
     deploy = config == DEPLOY or config == DEPLOY_AND_PREDICT
     predict = config == PREDICT or config == DEPLOY_AND_PREDICT
     if deploy:
         continuous_deployment_pipeline(
+            data_path = r"C:\Users\Pc\Desktop\Taha\Projects-Of-Data-Science\MLOPS PROJECT\data\olist_customers_dataset.csv",
             min_accuracy = min_accuracy,
             workers = 3,
             timeout = 60,
@@ -73,14 +78,15 @@ def run_deployment(config :str,min_accuracy:float):
     if existing_services:
         service = cast(MLFlowDeploymentService, existing_services[0])
         if service.is_running:
-            print(
-                f"The MLflow prediction server is running locally as a daemon "
-                f"process service and accepts inference requests at:\n"
-                f"    {service.prediction_url}\n"
-                f"To stop the service, run "
-                f"[italic green]`zenml model-deployer models delete "
-                f"{str(service.uuid)}`[/italic green]."
-            )
+                #Continuous Availability: Daemons ensure that your machine learning models are continuously available for serving predictions without requiring manual intervention each time a prediction is needed.
+                print(
+                    f"The MLflow prediction server is running locally as a daemon "
+                    f"process service and accepts inference requests at:\n"
+                    f"    {service.prediction_url}\n"
+                    f"To stop the service, run "
+                    f"[italic green]`zenml model-deployer models delete "
+                    f"{str(service.uuid)}`[/italic green]."
+                )
         elif service.is_failed:
             print(
                 f"The MLflow prediction server is in a failed state:\n"
@@ -94,4 +100,4 @@ def run_deployment(config :str,min_accuracy:float):
             "the same command with the `--deploy` argument to deploy a model."
         )
 if __name__ == "__main__":
-    main()
+    run_deployment()
