@@ -52,4 +52,12 @@ While this ZenML Project trains and deploys a model locally, other ZenML integra
 ![image](https://github.com/TahaDataAlchemy/Projects-Of-Data-Science/assets/157484236/4a4852a6-b5a6-41b6-a766-74b2daae4830)
 
 
+# TRAINING PIPELINE VISUALIZE IN ZENML DASHBOARD
+![alt text](image.png)
+
+
+
+
+
+
 
