@@ -9,4 +9,4 @@ if __name__ == "__main__":
 
 # pipeline Visulization Commands:
         # mlflow ui --backend-store-uri  "file:C:\Users\Pc\AppData\Roaming\zenml\local_stores\cb74b11f-5df8-4f21-8515-3af5ee40c668\mlruns"
-        # zenml --blocking up
+        # zenml up --blocking
