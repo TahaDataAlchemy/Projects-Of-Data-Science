@@ -13,7 +13,7 @@ def get_requirements(file_path: str) -> List[str]:
     try:
         with open(file_path) as file_obj:
             requirements = file_obj.readlines()
-            requirements = [req.strip() for req in requirements if req.strip() and not req.strip().startswith("#")]
+            requirements = [req.strip() for req in requirements if req.strip() and not req.strip().startswith("#")] # using for removing newline or any illegel character
 
             if HYPHEN_E_DOT in requirements:
                 requirements.remove(HYPHEN_E_DOT)
