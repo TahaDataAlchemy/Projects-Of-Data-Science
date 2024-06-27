@@ -1,5 +1,9 @@
 import sys
-import logging
+import os
+
+#This line of code is modifying the Python path so that the interpreter can locate modules that are not in the default path.
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from src.logger import logging
 
 def error_msg_details(error,error_detail:sys):
     _,_,exc_tb = error_detail.exc_info() # will tell every exception on which line and part of code has occured
@@ -21,4 +25,6 @@ if __name__ == "__main__":
     try:
         a=1/0
     except Exception as e:
+        logging.info("Divide by zero")
         raise CustomException(e,sys)
+
