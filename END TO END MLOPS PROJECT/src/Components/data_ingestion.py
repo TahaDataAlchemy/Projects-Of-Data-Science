@@ -11,7 +11,7 @@ import pandas as pd
 import logging
 from src.exception import CustomException
 
-@dataclass
+@dataclass # Because of this class also called Decorator, we can easily declare our variables without using def __init__ for every variable
 class DataIngestionConfig:
     train_data_path: str = os.path.join('artifact', "train.csv")
     test_data_path: str = os.path.join('artifact', "test.csv")
