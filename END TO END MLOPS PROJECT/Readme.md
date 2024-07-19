@@ -54,7 +54,7 @@
     __init__:
 
         Initializes the DataTransformation class with a configuration for saving the preprocessor object.
-        
+
 **get_data_transformer_object:**
 
     Purpose: Creates and returns a ColumnTransformer object for preprocessing numerical and categorical data.
@@ -85,3 +85,7 @@
     9) Saves the preprocessing object using save_object.
     10) Saving Code is written on Utils File purpose of it is to save the file in the pickle format
     11) Returns the processed train and test arrays along with the path to the saved preprocessor object.
+
+
+**Model Trainer Module**
+
