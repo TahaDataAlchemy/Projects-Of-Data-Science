@@ -10,6 +10,8 @@ from dataclasses import dataclass
 import pandas as pd
 import logging
 from src.exception import CustomException
+from src.Components.data_transformation import DataTransformation
+from src.Components.data_transformation import DataTransformationConfig
 
 @dataclass # Because of this class also called Decorator, we can easily declare our variables without using def __init__ for every variable
 class DataIngestionConfig:
@@ -55,7 +57,10 @@ class DataIngestion:
         
 if __name__=="__main__":
     obj=DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data,test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data,test_data)
 
 
 

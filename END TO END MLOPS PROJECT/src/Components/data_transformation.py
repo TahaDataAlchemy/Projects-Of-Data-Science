@@ -14,10 +14,11 @@ sys.path.append(project_root)
 
 from src.exception import CustomException
 from src.logger import logging
+from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig:
-    preprocessor_obj_file_path = os.path.join("artifacts","preprocessor.pkl")
+    preprocessor_obj_file_path = os.path.join("artifact","preprocessor.pkl")
 
 class DataTransformation:
     def __init__(self):
@@ -32,7 +33,7 @@ class DataTransformation:
             numerical_columns = ["writing_score","reading_score"]
             categorical_columns = [
                 "gender",
-                "race_ethincity",
+                "race_ethnicity",
                 "parental_level_of_education",
             ]
             num_pipeline = Pipeline(
@@ -45,7 +46,7 @@ class DataTransformation:
                 steps=[
                     ("imputer",SimpleImputer(strategy="most_frequent")),
                     ("one_hot_encoder",OneHotEncoder()),
-                    ("scaler",StandardScaler())
+                    ("scaler",StandardScaler(with_mean=False))
                 ]
             )
             logging.info("Numerical columns standard Scaling complete")
@@ -55,7 +56,7 @@ class DataTransformation:
             preprocessor = ColumnTransformer(
                 [
                     ("num_pipeline",num_pipeline,numerical_columns),
-                    ("Cat_pipelinece",Cat_pipeline,categorical_columns)
+                    ("Cat_pipeline",Cat_pipeline,categorical_columns)
                 ]
             )
 
@@ -86,13 +87,26 @@ class DataTransformation:
             )
 
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
-            input_feature_test_arr = preprocessing_obj.fit_transform(input_feature_test_df)
+            input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
 
-            train_arr = np.c_[
+            train_arr = np.c_[        # Use for Concatenating All data into one frame target and feature
                 input_feature_train_arr,np.array(target_feature_train_df)
             ]
             test_arr = np.c_[input_feature_test_arr,np.array(target_feature_test_df)]
 
-        except:
-            pass
+            logging.info(f"Saved Preprocessing object")
+
+            save_object(
+                file_path = self.data_transformation_config.preprocessor_obj_file_path,
+                obj = preprocessing_obj
+            )
+
+            return(
+                train_arr,
+                test_arr,
+                self.data_transformation_config.preprocessor_obj_file_path
+            )
+
+        except Exception as e:
+            raise CustomException(e,sys)
         
