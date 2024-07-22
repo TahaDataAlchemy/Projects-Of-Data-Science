@@ -88,4 +88,4 @@
 
 
 **Model Trainer Module**
-
+This class is responsible for Testing Every Algorithm present in the file 
