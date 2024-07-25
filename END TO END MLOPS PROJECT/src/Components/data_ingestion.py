@@ -12,6 +12,8 @@ import logging
 from src.exception import CustomException
 from src.Components.data_transformation import DataTransformation
 from src.Components.data_transformation import DataTransformationConfig
+from src.Components.model_trainer import ModelTrainerConfig
+from src.Components.model_trainer import ModelTrainer
 
 @dataclass # Because of this class also called Decorator, we can easily declare our variables without using def __init__ for every variable
 class DataIngestionConfig:
@@ -60,7 +62,11 @@ if __name__=="__main__":
     train_data,test_data = obj.initiate_data_ingestion()
 
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_arr,test_arr,_ = data_transformation.initiate_data_transformation(train_data,test_data)
+
+    modeltrainer = ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr,test_arr))
+
 
 
 
