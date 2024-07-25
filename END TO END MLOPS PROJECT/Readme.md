@@ -88,4 +88,66 @@
 
 
 **Model Trainer Module**
-This class is responsible for Testing Every Algorithm present in the file 
+        The Model Trainer module is designed to facilitate the process of training multiple machine learning models, evaluating their performance, and selecting the best model based on the R² score. The module includes functionalities for saving the best-performing model for future predictions.
+    
+**Key Components**
+
+**ModelTrainerConfig**
+
+    @dataclass is a decorator, we don't need to put init again and again for just declaring variables.
+
+    A configuration class using the @dataclass decorator to define the path for the trained model file. 
+    Attributes:
+
+    trained_model_file_path: Path to save the trained model object.
+
+**ModelTrainer**
+
+    A class responsible for training and evaluating various regression models, and saving the best-performing model.
+
+    Methods:
+
+    init:
+
+    Initializes the ModelTrainer class with a configuration for saving the trained model object.
+
+**initiate_model_trainer**:
+
+    Purpose: Trains multiple regression models on the provided training data, evaluates their performance on the test data, and saves the best-performing model.
+
+    Steps:
+
+    Splits the input data:
+
+    Splits the provided training and test arrays into input features (X) and target variable (y).
+    Defines the models:
+
+    Creates a dictionary of regression models to be evaluated, including:
+    RandomForestRegressor
+    DecisionTreeRegressor
+    GradientBoostingRegressor
+    LinearRegression
+    XGBRegressor
+    CatBoostRegressor
+    AdaBoostRegressor
+    Evaluates the models:
+
+    Uses the evalute_model function to evaluate each model's performance on the training and test datasets.
+    Logs the model evaluation process.
+    Selects the best model:
+
+    Identifies the model with the highest R² score from the evaluation results.
+    If no model achieves an R² score above 0.60, raises a CustomException.
+    Saves the best model:
+
+    Uses the save_object function to save the best-performing model to the specified file path.
+    Logs the model saving process.
+    Returns the R² score:
+
+    Predicts the target variable for the test data using the best model.
+    Calculates and returns the R² score for the predictions.
+**Exception Handling**:
+
+    Catches and logs any exceptions that occur during the model training and evaluation process.
+    Raises a CustomException with the error message if an exception is encountered.
+    This module is essential for training and selecting the best regression model for a given dataset, ensuring that the most accurate model is saved for future predictions.   
