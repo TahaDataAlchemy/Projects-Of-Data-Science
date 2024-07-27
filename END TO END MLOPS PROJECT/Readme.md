@@ -134,7 +134,18 @@
 
     Uses the evalute_model function to evaluate each model's performance on the training and test datasets.
     Logs the model evaluation process.
-    Selects the best model:
+
+**Models and Hyperparameters**
+    Random Forest
+    Decision Tree
+    Gradient Boosting
+    Linear Regression
+    XGBRegressor
+    CatBoosting Regressor
+    AdaBoost Regressor
+    The hyperparameters for each model are defined in the params dictionary.
+
+**Selects the best model:**
 
     Identifies the model with the highest R² score from the evaluation results.
     If no model achieves an R² score above 0.60, raises a CustomException.
