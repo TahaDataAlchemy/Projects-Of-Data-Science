@@ -161,4 +161,9 @@
 
     Catches and logs any exceptions that occur during the model training and evaluation process.
     Raises a CustomException with the error message if an exception is encountered.
-    This module is essential for training and selecting the best regression model for a given dataset, ensuring that the most accurate model is saved for future predictions.   
+    This module is essential for training and selecting the best regression model for a given dataset, ensuring that the most accurate model is saved for future predictions. 
+
+
+**Predicted Pipeline**
+        This class is responsible for Predicting Custom Data input by Users  
+        
