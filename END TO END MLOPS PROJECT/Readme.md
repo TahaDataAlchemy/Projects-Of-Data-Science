@@ -165,5 +165,6 @@
 
 
 **Predicted Pipeline**
+
         This class is responsible for Predicting Custom Data input by Users  
-        
+
