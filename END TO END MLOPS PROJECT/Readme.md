@@ -174,3 +174,4 @@
         The project is not available online as i turn off the services of AWS cloud
 
 **Deployed DOCKER IMAGE on AWS ECR->EC2 INSTANCE**
+    Starts deployement
