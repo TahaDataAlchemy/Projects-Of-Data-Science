@@ -169,9 +169,11 @@
         This class is responsible for Predicting Custom Data input by Users  
 
 **Deployed AWS**
+        
         This Project is also deployed using AWS elasticstalk bean and .ebextension is used for deployed requirment
 
         The project is not available online as i turn off the services of AWS cloud
 
 **Deployed DOCKER IMAGE on AWS ECR->EC2 INSTANCE**
+    
     Starts deployement
