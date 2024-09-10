@@ -177,3 +177,6 @@
 **Deployed DOCKER IMAGE on AWS ECR->EC2 INSTANCE**
     
     Starts deployement
+
+**FINAL OUTPUT**
+    ![alt text](image.png)
